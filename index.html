@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=League+Gothic&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
+
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>cricket-shudule</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+    
+</head>
+<body>
+
+    <div class="links">
+        <a href="index.html" class="l">Home</a>
+        <a href="cricket-shudule2.html" class="l">Another 25 Matches</a>
+        <a href="cricket-shudule3.html" class="l">Another 25 Matches</a>
+    </div>
+
+    <div class="container">
+
+        <h2 class="header">IPL Schedule 2022</h2>
+        <h2 class="header">Watch Out for IPL Related Updates</h2>
+
+
+
+        
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        window.onload = getUser;
+
+        async function getUser() {
+            const response = await axios.get('https://api.cricapi.com/v1/matches?apikey=de7337c9-0c74-4523-bcd7-2a4855f95e7f&offset=67');
+            //console.log(response);
+            console.log(response.data.data);
+
+            const data = response.data.data;
+            /*data.map((d) => {
+                console.log(d.name)
+            })*/
+
+
+
+            for (i = 0; i < data.length; i++) {
+                console.log(data[i].name)
+                document.querySelector('.container').innerHTML += `<div class="section"><div class="div1">
+                        <h1>Match Date: ${data[i].date}</h1>
+                    </div>
+                    <div class="line1"></div>
+                    <div class="div2">
+                        <div class="csk"><h1 class="team">${data[i].teams[0]}</h1></div>
+                        <div class="vs"><span>VS</span></div>
+                        <div class="kkr"><h1 class="team">${data[i].teams[1]}</h1></div>
+                    </div>
+                    <div class="line2"></div>
+                    <div class="div3">
+                        <h1 class="venue">${data[i].venue}</h1>
+                    </div>
+                     </div>`
+            }
+
+        }
+    </script>
+</body>
+</html>
